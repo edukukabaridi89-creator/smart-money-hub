@@ -1,0 +1,24 @@
+// Uses the app's own theme variables so it blends into the header.
+.nx-speed {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    margin-inline-end: 0.8rem;
+    border-radius: 6px;
+    background: var(--general-section-1);
+    button {
+        border: 0;
+        background: none;
+        color: var(--text-general);
+        font: inherit;
+        font-size: 1.2rem;
+        line-height: 1;
+        padding: 0.7rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        &.on { background: var(--general-main-1); font-weight: 700; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+    }
+    &--compact { border: 0; color: var(--text-general); font-size: 1.2rem; padding: 0.6rem 0.4rem; margin-inline-start: 0.6rem; }
+}
+.nx-header-cluster{display:flex;align-items:center;gap:.8rem}

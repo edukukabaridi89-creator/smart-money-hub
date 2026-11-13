@@ -1,0 +1,73 @@
+// DTrader-style Manual Trader. Colours come from the app theme; buy / sell use the Deriv trader's teal and red.
+.dt {
+    --dt-border: var(--border-normal, #d6dadb);
+    --dt-panel: var(--general-section-1, #f2f3f4);
+    --dt-card: var(--general-main-1, #fff);
+    --dt-muted: var(--text-less-prominent, #8b9096);
+    --dt-up: var(--nx-up, #4bb4b3);
+    --dt-down: var(--nx-down, #ec3f3f);
+    position: relative; width: 100%; height: var(--tab-content-height, calc(100vh - 16.6rem)); display: grid; grid-template-columns: minmax(0, 1fr) 32rem;
+    color: var(--text-general); background: var(--dt-card); font-size: 1.3rem;
+    &--expanded { width: calc(100vw - 39.8rem); }
+    @media (max-width: 1100px) { grid-template-columns: 1fr; height: auto; &__chart { height: 55vh; } }
+    &__chart { position: relative; min-width: 0; min-height: 0; .dashboard__chart-wrapper { width: 100% !important; height: 100% !important; } }
+    &__strip { position: absolute; left: 50%; bottom: 4.6rem; transform: translateX(-50%); z-index: 6; pointer-events: none; }
+    &__side { overflow: auto; padding: 1rem; background: var(--dt-panel); display: flex; flex-direction: column; gap: 0.8rem; min-height: 0; }
+}
+.dt-learn { font-size: 1.1rem; summary { cursor: pointer; color: var(--dt-muted); text-decoration: underline; } p { margin: 0.6rem 0 0; line-height: 1.45; } }
+.dt-type { display: flex; align-items: center; gap: 1rem; width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--dt-border); border-radius: 4px; background: var(--dt-card); color: inherit; font: inherit; font-weight: 700; cursor: pointer; text-align: left; i { margin-left: auto; font-style: normal; } &:hover { border-color: var(--text-general); } }
+.dt-icon { display: inline-flex; gap: 0.2rem; svg { width: 2.2rem; height: 2.2rem; } }
+.dt-glyph svg { width: 2rem; height: 2rem; display: block; }
+.dt-card {
+    background: var(--dt-card); border-radius: 4px; padding: 1rem 1.2rem; display: flex; flex-direction: column; gap: 0.8rem;
+    h6 { margin: 0; text-align: center; font-weight: 400; font-size: 1.3rem; }
+    select, .dt-text { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--dt-border); border-radius: 4px; background: var(--dt-card); color: inherit; font: inherit; }
+    input[type='range'] { width: 100%; accent-color: var(--text-general); }
+    &__value { text-align: center; font-weight: 700; }
+}
+.dt-step { display: flex; align-items: center; gap: 0.4rem; border: 1px solid var(--dt-border); border-radius: 4px; padding: 0.2rem 0.6rem; button { border: 0; background: none; color: inherit; font-size: 2rem; width: 3rem; cursor: pointer; } input { flex: 1; min-width: 0; border: 0; background: none; color: inherit; text-align: center; font: inherit; font-weight: 700; font-size: 1.4rem; &:focus { outline: 0; } } span { color: var(--dt-muted); } }
+.dt-chips, .dt-digits { display: grid; gap: 0.4rem; button { padding: 0.8rem 0; border: 0; background: var(--dt-panel); color: inherit; cursor: pointer; font: inherit; border-radius: 2px; &.on { background: var(--dt-border); font-weight: 700; } } }
+.dt-chips { grid-auto-flow: column; grid-auto-columns: 1fr; }
+.dt-digits { grid-template-columns: repeat(5, 1fr); }
+.dt-toggle { display: grid; grid-template-columns: 1fr 1fr; button { padding: 0.8rem; border: 0; background: var(--dt-card); color: inherit; cursor: pointer; font: inherit; &.on { background: var(--dt-border); font-weight: 700; } } }
+.dt-duration { display: grid; grid-template-columns: 1fr 1.4fr; gap: 0.6rem; }
+.dt-check { display: flex; gap: 0.8rem; align-items: center; cursor: pointer; input { width: 1.6rem; height: 1.6rem; } }
+.dt-buys { display: flex; flex-direction: column; gap: 0.8rem; }
+.dt-quote__info { font-size: 1.2rem; color: var(--dt-muted); margin-bottom: 0.3rem; }
+.dt-quote__err { color: var(--dt-down); font-size: 1.2rem; margin-top: 0.4rem; }
+.dt-buy {
+    width: 100%; height: 6.4rem; border: 0; border-radius: 4px; color: #fff; font: inherit; font-weight: 700; font-size: 1.4rem; display: flex; align-items: stretch; justify-content: space-between; padding: 0 0 0 1.4rem; cursor: pointer; overflow: hidden;
+    &--up { background: var(--dt-up); } &--down { background: var(--dt-down); } &:disabled { opacity: 0.5; cursor: default; }
+    &__label { display: flex; align-items: center; gap: 0.8rem; }
+    &__pct { display: flex; align-items: center; justify-content: flex-end; min-width: 9rem; padding: 0 1.4rem 0 3.6rem; background: rgba(0, 0, 0, 0.16); clip-path: polygon(2.4rem 0, 100% 0, 100% 100%, 0 100%); }
+}
+.dt-facts { margin: 0.6rem 0 0; div { display: flex; justify-content: space-between; padding: 0.2rem 0; } dt { font-weight: 700; } dd { margin: 0; text-decoration: underline dotted; } }
+.dt-note { color: var(--dt-muted); font-size: 1.2rem; margin: 0; }
+.dt-pos {
+    background: var(--dt-card); border-radius: 4px; padding: 1rem 1.2rem; h6 { margin: 0 0 0.6rem; font-size: 1.3rem; }
+    &__row { display: grid; grid-template-columns: 1fr auto auto auto; gap: 0.8rem; align-items: center; padding: 0.5rem 0; border-top: 1px solid var(--dt-border); small { display: block; color: var(--dt-muted); } .up { color: var(--dt-up); } .down { color: var(--dt-down); } button { padding: 0.3rem 0.8rem; border: 1px solid var(--dt-border); background: none; color: inherit; border-radius: 4px; cursor: pointer; } em { font-style: normal; color: var(--dt-muted); } &.win { background: rgba(75, 180, 179, 0.12); } &.loss { background: rgba(236, 63, 63, 0.1); } }
+}
+.dt-scrim { position: fixed; inset: 0; z-index: 19; }
+.dt-menu {
+    position: absolute; top: 1rem; right: 33rem; width: min(70rem, calc(100% - 35rem)); max-height: calc(100% - 2rem); display: grid; grid-template-columns: 20rem 1fr; background: var(--dt-card); border: 1px solid var(--dt-border); border-radius: 6px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); z-index: 20; overflow: hidden;
+    @media (max-width: 1100px) { right: 1rem; left: 1rem; width: auto; }
+    &__cats { background: var(--dt-panel); padding: 1.6rem 0; h4 { margin: 0 1.6rem 1.2rem; font-size: 1.5rem; } button { display: block; width: 100%; text-align: left; padding: 1rem 1.6rem; border: 0; border-left: 3px solid transparent; background: none; color: inherit; font: inherit; cursor: pointer; &.on { background: var(--dt-card); border-left-color: var(--dt-down); font-weight: 700; } } }
+    &__list { padding: 1.2rem; overflow: auto; max-height: 60rem; input { width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--dt-border); border-radius: 4px; background: var(--dt-card); color: inherit; font: inherit; margin-bottom: 1rem; } }
+    &__group { h5 { margin: 1.2rem 0 0.4rem; font-size: 1.3rem; } button { display: flex; align-items: center; gap: 1rem; width: 100%; padding: 1rem; border: 0; border-radius: 4px; background: none; color: inherit; font: inherit; cursor: pointer; text-align: left; &:hover, &.on { background: var(--dt-panel); } } }
+    &__empty { color: var(--dt-muted); }
+}
+
+/* Phones: a shorter chart, the Over/Under (and every other) trade type menu as a full-width sheet, and room at the bottom so the Buy buttons scroll clear of the Run bar */
+@media (max-width: 700px) {
+    .dt { font-size: 1.4rem; }
+    .dt__chart { height: 30vh !important; min-height: 21rem; }
+    .dt__side { padding-bottom: 20rem; }
+    .dt-buy { height: 5.4rem; font-size: 1.6rem; }
+    .dt-scrim { z-index: 8999; }
+    .dt-menu { position: fixed; top: 6.5rem; left: 0.8rem; right: 0.8rem; bottom: 12rem; width: auto; max-height: none; grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); z-index: 9000; }
+    .dt-menu__cats { display: flex; align-items: center; gap: 0.4rem; padding: 0.6rem 0.8rem; overflow-x: auto; h4 { display: none; } button { width: auto; white-space: nowrap; padding: 1rem 1.4rem; border-left: 0; border-bottom: 3px solid transparent; &.on { border-bottom-color: var(--dt-down); } } }
+    .dt-menu__list { max-height: none; overflow-y: auto; }
+    .dt-menu__group button { padding: 1.3rem 1rem; font-size: 1.6rem; }
+}
+
+.dt-card input[type='range'] { width: 100%; accent-color: var(--nx-primary, #2f6bff); }

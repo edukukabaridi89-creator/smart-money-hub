@@ -1,0 +1,99 @@
+// Bot Studio and My Bots. Uses the app's own theme variables, so it follows the light / dark theme.
+.studio {
+    --st-border: var(--border-normal, rgba(128, 128, 128, 0.35));
+    --st-soft: var(--general-section-1, rgba(128, 128, 128, 0.1));
+    --st-muted: var(--text-less-prominent, #999);
+    width: 100%;
+    height: var(--tab-content-height, calc(100vh - 16.6rem));
+    overflow: auto;
+    color: var(--text-general);
+    font-size: 1.4rem;
+
+    &--expanded { width: calc(100vw - 39.8rem); }
+
+    &__head {
+        margin-bottom: 1.2rem;
+        h2 { margin: 0 0 0.2rem; font-size: 1.8rem; font-weight: 700; }
+        p { margin: 0; color: var(--st-muted); font-size: 1.3rem; max-width: 70rem; }
+    }
+    &__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 32rem;
+        gap: 1.6rem;
+        height: calc(100% - 6.4rem);
+        min-height: 46rem;
+        @media (max-width: 1100px) { grid-template-columns: 1fr; height: auto; }
+    }
+    &__chat, &__panel { border: 1px solid var(--st-border); border-radius: 6px; background: var(--general-main-1); }
+    &__chat { display: flex; flex-direction: column; min-height: 0; @media (max-width: 1100px) { min-height: 50rem; } }
+    &__log { flex: 1; min-height: 0; overflow: auto; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    &__msg {
+        max-width: 80%;
+        padding: 0.8rem 1.2rem;
+        border-radius: 6px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        &--bot { align-self: flex-start; background: var(--st-soft); }
+        &--user { align-self: flex-end; background: var(--button-primary-default, #ff444f); color: var(--text-colored-background, #fff); }
+        &--live { opacity: 0.7; font-style: italic; }
+    }
+    &__chips { display: flex; flex-wrap: wrap; gap: 0.6rem; padding-top: 0.4rem; }
+    &__chip, &__btn {
+        font: inherit;
+        font-size: 1.3rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 4px;
+        border: 1px solid var(--st-border);
+        background: var(--general-main-1);
+        color: var(--text-general);
+        cursor: pointer;
+        &:hover:not(:disabled) { background: var(--st-soft); }
+        &:disabled { opacity: 0.5; cursor: default; }
+    }
+    &__chip { border-radius: 16px; }
+    &__btn--primary { background: var(--button-primary-default, #ff444f); border-color: transparent; color: var(--text-colored-background, #fff); &:hover:not(:disabled) { background: var(--button-primary-default, #ff444f); filter: brightness(0.92); } }
+    &__btn--danger { border-color: var(--button-primary-default, #ff444f); color: var(--button-primary-default, #ff444f); }
+    &__input {
+        display: flex;
+        gap: 0.6rem;
+        padding: 1rem;
+        border-top: 1px solid var(--st-border);
+        input { flex: 1; min-width: 0; font: inherit; padding: 0.8rem 1.2rem; border: 1px solid var(--st-border); border-radius: 4px; background: var(--general-main-1); color: var(--text-general); }
+    }
+    &__mic {
+        width: 4rem;
+        border: 1px solid var(--st-border);
+        border-radius: 4px;
+        background: var(--general-main-1);
+        color: var(--text-general);
+        cursor: pointer;
+        &:disabled { opacity: 0.4; cursor: default; }
+        &.is-on { color: var(--text-colored-background, #fff); background: var(--button-primary-default, #ff444f); border-color: transparent; animation: studioPulse 1.2s ease-in-out infinite; }
+    }
+    &__error { padding: 0 1.4rem 0.8rem; color: var(--button-primary-default, #ff444f); font-size: 1.2rem; }
+
+    &__panel {
+        padding: 1.4rem;
+        overflow: auto;
+        h3 { margin: 0 0 1rem; font-size: 1.5rem; }
+        dl { margin: 0 0 1.2rem; div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid var(--st-border); &.is-empty dd { color: var(--st-muted); } } }
+        dt { color: var(--st-muted); }
+        dd { margin: 0; text-align: right; }
+    }
+    &__name { display: flex; flex-direction: column; gap: 0.4rem; color: var(--st-muted); font-size: 1.2rem; input { font: inherit; font-size: 1.4rem; padding: 0.8rem 1.2rem; border: 1px solid var(--st-border); border-radius: 4px; background: var(--general-main-1); color: var(--text-general); } }
+    &__create { width: 100%; margin-top: 1.2rem; padding: 1rem; }
+    &__link { display: block; margin: 1rem auto 0; background: none; border: 0; color: var(--st-muted); text-decoration: underline; cursor: pointer; font: inherit; font-size: 1.2rem; }
+
+    &__save { display: flex; gap: 0.8rem; margin-bottom: 1.6rem; flex-wrap: wrap; input { flex: 1; min-width: 20rem; max-width: 40rem; font: inherit; padding: 0.7rem 1.2rem; border: 1px solid var(--st-border); border-radius: 4px; background: var(--general-main-1); color: var(--text-general); } }
+    &__cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr)); gap: 1.2rem; }
+    &__card {
+        display: flex; flex-direction: column; gap: 0.6rem; padding: 1.4rem; border: 1px solid var(--st-border); border-radius: 6px; background: var(--general-main-1);
+        h4 { margin: 0; font-size: 1.5rem; }
+        p { margin: 0; color: var(--st-muted); font-size: 1.25rem; line-height: 1.45; flex: 1; }
+        small { color: var(--st-muted); }
+    }
+    &__row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.4rem; }
+    &__empty { padding: 3rem 0; color: var(--st-muted); p { margin: 0 0 1rem; } }
+}
+.nx-new { margin-inline-start: 0.6rem; padding: 0.1rem 0.5rem; border-radius: 3px; background: var(--button-primary-default, #ff444f); color: var(--text-colored-background, #fff); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; vertical-align: middle; }
+@keyframes studioPulse { 50% { box-shadow: 0 0 0 5px rgba(255, 68, 79, 0.2); } }
